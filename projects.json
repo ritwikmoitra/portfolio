@@ -1,0 +1,18 @@
+[
+  {
+    "display_name": "Education Assistant",
+    "slug": "education-assistant",
+    "emoji": "\ud83d\udcda",
+    "one_liner": "Structured study guides for DS, ML & GenAI topics",
+    "tech_tags": [
+      "Claude API",
+      "MCP",
+      "TypeScript",
+      "Vercel"
+    ],
+    "mcp_url": "https://education-assistant.vercel.app/api/mcp",
+    "github_url": "https://github.com/ritwikmoitra/education-assistant",
+    "added_at": "2026-03-31T11:49:51.514700+00:00",
+    "updated_at": "2026-03-31T11:49:51.514700+00:00"
+  }
+]
