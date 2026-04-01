@@ -12,9 +12,9 @@
       "Vercel",
       "Python"
     ],
-    "mcp_url": "https://education-assistant-mcp.vercel.app/api/mcp",
+    "mcp_url": "https://mcp-server-zeta-bay.vercel.app/api/mcp",
     "github_url": "https://github.com/ritwikmoitra/education-assistant",
     "added_at": "2026-03-31T11:49:51.514700+00:00",
-    "updated_at": "2026-04-01T12:09:45.108803+00:00"
+    "updated_at": "2026-04-01T12:21:18.426861+00:00"
   }
 ]
