@@ -1,106 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Ritwik Moitra · AI Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0f0f13; --surface: #18181f; --surface2: #22222c;
-    --border: rgba(255,255,255,0.08); --text: #e8e8f0; --muted: #888899;
-    --accent: #7c6dfa; --accent2: #a78bfa;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  body { background: var(--bg); color: var(--text); min-height: 100vh; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-  .hero { padding: 80px 0 48px; border-bottom: 1px solid var(--border); }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; }
-  .hero h1 span { color: var(--accent2); }
-  .hero p { margin-top: 16px; font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
-  .hero-links { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-links a {
-    display: inline-flex; align-items: center; padding: 8px 16px;
-    border-radius: 6px; font-size: 0.875rem; font-weight: 500; text-decoration: none;
-    border: 1px solid var(--border); color: var(--text); transition: all 0.2s;
-  }
-  .hero-links a:hover { border-color: var(--accent); background: rgba(124,109,250,0.08); }
-  .hero-links a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .section { padding: 60px 0; }
-  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 40px; }
-  .bento { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-    padding: 24px; display: flex; flex-direction: column; gap: 12px;
-    transition: border-color 0.2s, transform 0.15s;
-  }
-  .card:hover { border-color: rgba(124,109,250,0.4); transform: translateY(-2px); }
-  .card-emoji { font-size: 1.75rem; }
-  .card-name { font-size: 1.05rem; font-weight: 600; }
-  .card-pitch { font-size: 0.875rem; color: var(--muted); line-height: 1.6; flex: 1; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-size: 0.7rem; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: rgba(124,109,250,0.12); color: var(--accent2); border: 1px solid rgba(124,109,250,0.2); }
-  .card-links { display: flex; gap: 8px; margin-top: 4px; }
-  .card-links a { flex: 1; text-align: center; padding: 7px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 500; text-decoration: none; border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
-  .card-links a:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-  .card-links a.demo { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .card-date { font-size: 0.7rem; color: var(--muted); }
-  .stack-strip { display: flex; flex-wrap: wrap; gap: 12px; }
-  .stack-pill { padding: 8px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 500; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
-  footer { padding: 40px 0; border-top: 1px solid var(--border); font-size: 0.825rem; color: var(--muted); }
-  .empty { text-align: center; padding: 60px 0; color: var(--muted); }
-  @media (max-width: 600px) { .bento { grid-template-columns: 1fr; } }
+:root{
+  --bg:#07080A;
+  --surface:#0F1014;
+  --surface2:#16181E;
+  --border:rgba(255,255,255,0.07);
+  --border-hover:rgba(245,166,35,0.4);
+  --text:#E8E6E0;
+  --muted:#6B6D75;
+  --accent:#F5A623;
+  --accent2:#FFD07A;
+  --green:#34D399;
+  --red:#F87171;
+  --blue:#60A5FA;
+  --font-display:'Syne',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* ── Grain overlay ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(7,8,10,0.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:-0.02em;cursor:pointer}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+
+/* ── Pages ── */
+.page{display:none;padding-top:80px;min-height:100vh}
+.page.active{display:block}
+
+/* ── Container ── */
+.container{max-width:1100px;margin:0 auto;padding:0 48px}
+
+/* ══════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════ */
+
+/* Hero */
+.hero{padding:80px 0 60px;position:relative}
+.hero-eyebrow{font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:20px}
+.hero-name{font-family:var(--font-display);font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:-0.04em;margin-bottom:16px}
+.hero-name span{color:var(--accent)}
+.hero-role{font-size:1.1rem;color:var(--muted);margin-bottom:32px;max-width:620px;line-height:1.7}
+.hero-role strong{color:var(--text)}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.hero-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid var(--border);border-radius:4px;font-size:0.78rem;color:var(--muted);font-family:var(--font-mono)}
+.hero-chip::before{content:'▸';color:var(--accent);font-size:0.6rem}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:6px;font-size:0.875rem;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text);cursor:pointer;transition:all 0.2s;background:transparent;font-family:var(--font-body)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#07080A}
+.btn-primary:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
+
+/* About strip */
+.about-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:32px 0;margin-bottom:72px}
+.about-text{font-size:0.95rem;color:var(--muted);max-width:780px;line-height:1.8}
+.about-text strong{color:var(--text)}
+
+/* Section */
+.section{margin-bottom:80px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+.section-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase}
+.section-title{font-family:var(--font-display);font-size:1.75rem;font-weight:700;letter-spacing:-0.03em}
+
+/* Skills grid */
+.skills-grid{display:flex;flex-wrap:wrap;gap:8px}
+.skill-pill{padding:6px 14px;border:1px solid var(--border);border-radius:3px;font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);transition:all 0.2s}
+.skill-pill:hover{border-color:var(--border-hover);color:var(--accent)}
+
+/* Experience */
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.exp-period{font-family:var(--font-mono);font-size:0.72rem;color:var(--muted);padding-top:4px}
+.exp-content{}
+.exp-role{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:2px}
+.exp-company{font-size:0.875rem;color:var(--accent);margin-bottom:8px}
+.exp-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+/* Project cards */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
+.project-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(245,166,35,0.04),transparent 60%);pointer-events:none}
+.project-card:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.4)}
+.card-emoji{font-size:2rem;margin-bottom:16px}
+.card-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;margin-bottom:8px;letter-spacing:-0.02em}
+.card-tldr{font-size:0.875rem;color:var(--muted);line-height:1.65;margin-bottom:16px;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.card-tag{font-size:0.68rem;font-family:var(--font-mono);padding:3px 8px;border-radius:3px;background:rgba(245,166,35,0.08);color:var(--accent);border:1px solid rgba(245,166,35,0.15)}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-link{font-size:0.8rem;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color 0.2s}
+.card-link:hover{color:var(--text)}
+.card-arrow{font-size:0.875rem;color:var(--accent);font-family:var(--font-mono)}
+
+/* ══════════════════════════════════════════
+   PROJECT PAGE
+══════════════════════════════════════════ */
+.project-page-inner{display:grid;grid-template-columns:1fr;gap:0;padding:48px 0}
+.project-back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:0.85rem;cursor:pointer;margin-bottom:40px;transition:color 0.2s;background:none;border:none;font-family:var(--font-body)}
+.project-back:hover{color:var(--text)}
+.project-hero{margin-bottom:56px}
+.project-hero-emoji{font-size:2.5rem;margin-bottom:16px}
+.project-hero-name{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-0.04em;margin-bottom:12px}
+.project-hero-desc{font-size:1rem;color:var(--muted);max-width:620px;line-height:1.7;margin-bottom:24px}
+.project-links{display:flex;gap:10px}
+
+/* Tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:40px}
+.tab{padding:12px 24px;font-size:0.875rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font-body)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover:not(.active){color:var(--text)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* README renderer */
+.readme-body{max-width:780px}
+.readme-body h1,.readme-body h2,.readme-body h3,.readme-body h4{font-family:var(--font-display);font-weight:700;letter-spacing:-0.02em;margin:2rem 0 1rem;color:var(--text)}
+.readme-body h1{font-size:2rem}
+.readme-body h2{font-size:1.4rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.readme-body h3{font-size:1.1rem;color:var(--accent2)}
+.readme-body p{color:var(--muted);line-height:1.8;margin-bottom:1rem}
+.readme-body a{color:var(--accent);text-decoration:none}
+.readme-body a:hover{text-decoration:underline}
+.readme-body code{font-family:var(--font-mono);font-size:0.82em;background:var(--surface2);padding:2px 6px;border-radius:3px;color:var(--accent2)}
+.readme-body pre{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:20px;overflow-x:auto;margin:1.5rem 0}
+.readme-body pre code{background:none;padding:0;font-size:0.85rem;color:var(--text)}
+.readme-body ul,.readme-body ol{color:var(--muted);padding-left:1.5rem;margin-bottom:1rem}
+.readme-body li{margin-bottom:4px;line-height:1.7}
+.readme-body table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.875rem}
+.readme-body th{background:var(--surface2);padding:10px 14px;text-align:left;font-family:var(--font-display);font-weight:700;font-size:0.85rem;border:1px solid var(--border);color:var(--text)}
+.readme-body td{padding:10px 14px;border:1px solid var(--border);color:var(--muted);vertical-align:top}
+.readme-body blockquote{border-left:3px solid var(--accent);padding-left:16px;margin:1.5rem 0;color:var(--muted);font-style:italic}
+.readme-body img{max-width:100%;border-radius:8px}
+.readme-loading{color:var(--muted);font-family:var(--font-mono);font-size:0.85rem;padding:40px 0}
+
+/* ── MCP Chat ── */
+.chat-container{max-width:780px}
+.chat-setup{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+.chat-setup-title{font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:4px}
+.chat-setup-sub{font-size:0.8rem;color:var(--muted);margin-bottom:16px}
+.input-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:200px}
+.field label{font-size:0.75rem;font-family:var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.field input,.field textarea,.field select{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-family:var(--font-body);font-size:0.875rem;outline:none;transition:border-color 0.2s;width:100%}
+.field input:focus,.field textarea:focus{border-color:rgba(245,166,35,0.5)}
+.field textarea{min-height:80px;resize:vertical}
+.field input[type=password]{font-family:var(--font-mono);letter-spacing:0.1em}
+.chat-messages{display:flex;flex-direction:column;gap:16px;margin-bottom:20px;min-height:120px}
+.msg{display:flex;flex-direction:column;gap:6px}
+.msg-label{font-size:0.7rem;font-family:var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+.msg-bubble{padding:16px 20px;border-radius:10px;font-size:0.875rem;line-height:1.7;max-width:100%}
+.msg-user .msg-bubble{background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.15);color:var(--text)}
+.msg-assistant .msg-bubble{background:var(--surface);border:1px solid var(--border);color:var(--muted)}
+.msg-assistant .msg-bubble h1,.msg-assistant .msg-bubble h2,.msg-assistant .msg-bubble h3{font-family:var(--font-display);font-weight:700;color:var(--text);margin:1rem 0 0.5rem}
+.msg-assistant .msg-bubble h2{font-size:1.1rem;color:var(--accent2)}
+.msg-assistant .msg-bubble h3{font-size:0.95rem;color:var(--text)}
+.msg-assistant .msg-bubble strong{color:var(--text)}
+.msg-assistant .msg-bubble code{font-family:var(--font-mono);font-size:0.8em;background:var(--surface2);padding:1px 5px;border-radius:3px;color:var(--accent2)}
+.msg-assistant .msg-bubble table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.8rem}
+.msg-assistant .msg-bubble th{background:var(--surface2);padding:8px 12px;text-align:left;border:1px solid var(--border);font-family:var(--font-display);font-weight:700;font-size:0.8rem;color:var(--text)}
+.msg-assistant .msg-bubble td{padding:8px 12px;border:1px solid var(--border);color:var(--muted)}
+.msg-assistant .msg-bubble ul,.msg-assistant .msg-bubble ol{padding-left:1.2rem;color:var(--muted)}
+.msg-assistant .msg-bubble li{margin-bottom:3px}
+.msg-error .msg-bubble{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);color:var(--red)}
+.msg-thinking .msg-bubble{color:var(--muted);font-family:var(--font-mono);font-size:0.8rem;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+.chat-run-btn{padding:11px 24px;background:var(--accent);border:none;border-radius:6px;color:#07080A;font-family:var(--font-display);font-weight:700;font-size:0.875rem;cursor:pointer;transition:background 0.2s;white-space:nowrap}
+.chat-run-btn:hover{background:var(--accent2)}
+.chat-run-btn:disabled{opacity:0.5;cursor:not-allowed}
+.key-status{font-size:0.75rem;margin-top:8px;font-family:var(--font-mono)}
+.key-ok{color:var(--green)}
+.key-no{color:var(--muted)}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--border);padding:32px 0;font-size:0.8rem;color:var(--muted);margin-top:80px}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page.active .hero,.page.active .about-strip,.page.active .section{animation:fadeUp 0.4s ease forwards}
+.page.active .project-page-inner{animation:fadeUp 0.35s ease forwards}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .container{padding:0 20px}
+  nav{padding:16px 20px}
+  .nav-links{gap:20px}
+  .projects-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:4px}
+  .input-row{flex-direction:column}
+}
 </style>
 </head>
 <body>
+
+<nav>
+  <div class="nav-logo" onclick="navigate('home')">RM</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="navigate('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="https://linkedin.com/in/ritwikmoitra" target="_blank">LinkedIn</a></li>
+    <li><a href="https://github.com/ritwikmoitra" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════ HOME PAGE ════════════════════ -->
+<div class="page active" id="page-home">
 <div class="container">
-  <header class="hero">
-    <p class="section-label">AI Engineering</p>
-    <h1>Built with <span>Claude.</span></h1>
-    <p>A collection of end-to-end AI products, workflows, and automation tools — each shipped as a live MCP server and open-source skill.</p>
-    <div class="hero-links">
-      <a class="primary" href="https://github.com/ritwikmoitra" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/ritwikmoitra" target="_blank">LinkedIn</a>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Analytics · AI Engineering · Product</p>
+    <h1 class="hero-name">Ritwik<br><span>Moitra</span></h1>
+    <p class="hero-role">
+      <strong>Analytics Manager @ Ninjacart</strong> — India's largest B2B fresh produce platform.<br>
+      Building AI-native tools and MCP servers that turn Claude skills into live products.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-chip">Bengaluru, India</span>
+      <span class="hero-chip">IIM Indore · MBA</span>
+      <span class="hero-chip">BIT Mesra · BE Mechanical</span>
+      <span class="hero-chip">5+ yrs Analytics</span>
     </div>
-  </header>
-  <section class="section">
-    <p class="section-label">Projects</p>
-    <h2 class="section-title">Live AI tools</h2>
-    <div class="bento" id="project-grid"><div class="empty">Loading projects…</div></div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://linkedin.com/in/ritwikmoitra" target="_blank">LinkedIn Profile</a>
+      <a class="btn" href="https://github.com/ritwikmoitra" target="_blank">GitHub</a>
+    </div>
   </section>
+
+  <div class="about-strip">
+    <p class="about-text">
+      With over five years in analytics, I lead <strong>lending analytics, product analytics, and API development</strong>
+      at Ninjacart — managing AUM of ₹1Cr+ loan products, building churn prediction models, and driving
+      20% MoM payments adoption through A/B-tested cashback campaigns. I'm currently building
+      <strong>AI engineering skills as MCP servers</strong> — deployable tools that plug directly into Claude Desktop.
+    </p>
+  </div>
+
   <section class="section">
-    <p class="section-label">Stack</p>
-    <h2 class="section-title">How these are built</h2>
-    <div class="stack-strip" id="stack-strip"></div>
+    <div class="section-header">
+      <span class="section-label">01</span>
+      <h2 class="section-title">AI Projects</h2>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+      <!-- injected by JS -->
+    </div>
   </section>
-</div>
-<footer><div class="container">Built with Claude AI Portfolio Builder · Auto-updated on each skill publish</div></footer>
-<script>
-async function loadProjects() {
-  const grid = document.getElementById('project-grid');
-  const strip = document.getElementById('stack-strip');
-  try {
-    const r = await fetch('projects.json?t=' + Date.now());
-    const projects = await r.json();
-    if (!projects.length) { grid.innerHTML = '<div class="empty">No projects yet.</div>'; return; }
-    grid.innerHTML = projects.map(p => `
-      <div class="card">
-        <div class="card-emoji">${p.emoji}</div>
-        <div class="card-name">${p.display_name}</div>
-        <div class="card-pitch">${p.one_liner}</div>
-        <div class="card-tags">${(p.tech_tags||[]).map(t => `<span class="tag">${t}</span>`).join('')}</div>
-        <div class="card-links">
-          ${p.mcp_url ? `<a class="demo" href="${p.mcp_url}" target="_blank">⚡ MCP</a>` : ''}
-          ${p.github_url ? `<a href="${p.github_url}" target="_blank">⌥ GitHub</a>` : ''}
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">02</span>
+      <h2 class="section-title">Core Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <span class="skill-pill">Python</span>
+      <span class="skill-pill">SQL</span>
+      <span class="skill-pill">Product Analytics</span>
+      <span class="skill-pill">Business Analytics</span>
+      <span class="skill-pill">Claude API</span>
+      <span class="skill-pill">MCP Servers</span>
+      <span class="skill-pill">Lending Analytics</span>
+      <span class="skill-pill">A/B Testing</span>
+      <span class="skill-pill">Churn Prediction</span>
+      <span class="skill-pill">Flask / API Dev</span>
+      <span class="skill-pill">Power BI / Tableau</span>
+      <span class="skill-pill">Stakeholder Mgmt</span>
+      <span class="skill-pill">Product Management</span>
+      <span class="skill-pill">Team Leadership</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-label">03</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-period">Jan 2025 — Present</span>
+        <div class="exp-content">
+          <div class="exp-role">Analytics Manager</div>
+          <div class="exp-company">Ninjacart</div>
+          <div class="exp-desc">Driving monetization through Adtech & User Engagement for Agri Farmer app at scale (~0.4Mn users).</div>
         </div>
-        <div class="card-date">Added ${new Date(p.added_at).toLocaleDateString('en-GB',{month:'short',year:'numeric'})}</div>
-      </div>`).join('');
-    const all_tags = [...new Set(projects.flatMap(p => p.tech_tags||[]))];
-    strip.innerHTML = all_tags.map(t => `<span class="stack-pill">${t}</span>`).join('');
-  } catch(e) { grid.innerHTML = '<div class="empty">Failed to load projects.</div>'; }
+      </div>
+      <div class="exp-item">
+        <span class="exp-period">Jan 2022 — Jan 2025</span>
+        <div class="exp-content">
+          <div class="exp-role">Senior Business Analyst</div>
+          <div class="exp-company">Ninjacart</div>
+          <div class="exp-desc">Built daily-settlement loan product (AUM ₹1Cr+, &lt;5% delinquency), churn prediction model (~16% accuracy lift), tiering system for BNPL, and Flask-based API features. Led Neobank pod analytics.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="exp-period">Jan 2021 — Oct 2021</span>
+        <div class="exp-content">
+          <div class="exp-role">Business Analyst</div>
+          <div class="exp-company">Axis Bank</div>
+          <div class="exp-desc">Corporate Analytics & Financial Planning, BIU.</div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="exp-period">Jun 2018 — Jan 2021</span>
+        <div class="exp-content">
+          <div class="exp-role">Multiple Roles (Trade Marketing → Consumer Marketing → Program Manager)</div>
+          <div class="exp-company">Bharti Airtel</div>
+          <div class="exp-desc">Territory planning, channel digitization, GTM execution, and predictive modelling for churn across WB/KOL circles and Nairobi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<!-- ════════════════════ PROJECT PAGE ════════════════════ -->
+<div class="page" id="page-project">
+<div class="container">
+<div class="project-page-inner">
+
+  <button class="project-back" onclick="navigate('home')">← Back to portfolio</button>
+
+  <div class="project-hero">
+    <div class="project-hero-emoji" id="proj-emoji"></div>
+    <h1 class="project-hero-name" id="proj-name"></h1>
+    <p class="project-hero-desc" id="proj-desc"></p>
+    <div class="project-links" id="proj-links"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('readme',this)">📄 README</button>
+    <button class="tab" onclick="switchTab('live',this)">⚡ Live</button>
+  </div>
+
+  <!-- README tab -->
+  <div class="tab-panel active" id="tab-readme">
+    <div class="readme-body" id="readme-content">
+      <p class="readme-loading">Fetching README from GitHub…</p>
+    </div>
+  </div>
+
+  <!-- Live / Chat tab -->
+  <div class="tab-panel" id="tab-live">
+    <div class="chat-container">
+
+      <div class="chat-setup">
+        <div class="chat-setup-title">Connect your API key</div>
+        <div class="chat-setup-sub">Your key is never stored or sent anywhere except directly to the MCP server.</div>
+        <div class="input-row">
+          <div class="field" style="flex:2">
+            <label>Anthropic API Key (BYOK)</label>
+            <input type="password" id="chat-apikey" placeholder="sk-ant-..." oninput="onKeyInput(this)"/>
+          </div>
+        </div>
+        <div class="key-status key-no" id="key-status">No key entered</div>
+      </div>
+
+      <div id="tool-inputs"></div>
+
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="input-row">
+        <button class="chat-run-btn" id="run-btn" onclick="runTool()" disabled>Run →</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<footer>
+  <div class="container">
+    Built with Claude AI · <a href="https://github.com/ritwikmoitra" style="color:var(--accent);text-decoration:none">github.com/ritwikmoitra</a>
+  </div>
+</footer>
+
+<script>
+// ─── Projects registry ─────────────────────────────────────────────────────
+const PROJECTS = [
+  {
+    slug: "education-assistant",
+    name: "Education Assistant",
+    emoji: "📚",
+    tldr: "Deep-research any DS/ML/GenAI/Statistics topic. Get a structured 6-section summary (definition, agenda, prerequisites, analogy, applications, pitfalls) plus a curated Top 5 free resource list — powered by Claude Opus.",
+    tags: ["Claude Opus", "MCP", "Express", "Vercel", "Python"],
+    github: "ritwikmoitra/education-assistant",
+    mcp: "https://mcp-server-zeta-bay.vercel.app/api/mcp",
+    tool: "research_topics",
+    toolInputs: [
+      { name: "topics", label: "Topics to research", placeholder: "e.g. BSTS, causal inference, RAG, RLHF", type: "textarea" },
+      { name: "comfort_level", label: "Comfort level", placeholder: "beginner / intermediate / advanced", type: "text" }
+    ]
+  }
+];
+
+// ─── Router ────────────────────────────────────────────────────────────────
+let currentProject = null;
+
+function navigate(page, slug) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+  if (page === 'home') {
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active');
+    window.location.hash = '';
+  } else if (page === 'project' && slug) {
+    currentProject = PROJECTS.find(p => p.slug === slug);
+    if (!currentProject) return navigate('home');
+    document.getElementById('page-project').classList.add('active');
+    window.location.hash = 'project/' + slug;
+    loadProject(currentProject);
+  }
 }
-loadProjects();
+
+function loadProject(proj) {
+  document.getElementById('proj-emoji').textContent = proj.emoji;
+  document.getElementById('proj-name').textContent = proj.name;
+  document.getElementById('proj-desc').textContent = proj.tldr;
+  document.getElementById('proj-links').innerHTML = `
+    <a class="btn btn-primary" href="https://github.com/${proj.github}" target="_blank">GitHub →</a>
+    <a class="btn" href="#" onclick="switchTabByName('live')">Try Live ⚡</a>
+  `;
+
+  // Reset tabs
+  switchTab('readme', document.querySelector('.tab'));
+
+  // Load README
+  document.getElementById('readme-content').innerHTML = '<p class="readme-loading">Fetching README…</p>';
+  fetch(`https://raw.githubusercontent.com/${proj.github}/main/README.md`)
+    .then(r => r.ok ? r.text() : Promise.reject(r.status))
+    .then(md => {
+      document.getElementById('readme-content').innerHTML = marked.parse(md);
+    })
+    .catch(() => {
+      document.getElementById('readme-content').innerHTML = '<p class="readme-loading" style="color:var(--red)">Could not load README. <a href="https://github.com/'+proj.github+'" target="_blank" style="color:var(--accent)">View on GitHub →</a></p>';
+    });
+
+  // Build tool inputs
+  const toolDiv = document.getElementById('tool-inputs');
+  toolDiv.innerHTML = '<div class="chat-setup" style="margin-bottom:16px"><div class="chat-setup-title">Tool: ' + proj.tool + '</div><div class="input-row" id="dynamic-inputs"></div></div>';
+  const dynDiv = document.getElementById('dynamic-inputs');
+  proj.toolInputs.forEach(inp => {
+    const f = document.createElement('div');
+    f.className = 'field';
+    f.style.flex = inp.type === 'textarea' ? '2' : '1';
+    f.innerHTML = `<label>${inp.label}</label>${inp.type === 'textarea'
+      ? `<textarea id="inp-${inp.name}" placeholder="${inp.placeholder}"></textarea>`
+      : `<input type="text" id="inp-${inp.name}" placeholder="${inp.placeholder}"/>`}`;
+    dynDiv.appendChild(f);
+  });
+
+  // Reset chat
+  document.getElementById('chat-messages').innerHTML = '';
+  document.getElementById('chat-apikey').value = '';
+  document.getElementById('key-status').textContent = 'No key entered';
+  document.getElementById('key-status').className = 'key-status key-no';
+  document.getElementById('run-btn').disabled = true;
+}
+
+// ─── Tabs ─────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.tab').forEach(t => {
+      if (t.textContent.toLowerCase().includes(name)) t.classList.add('active');
+    });
+  }
+  document.getElementById('tab-' + name).classList.add('active');
+}
+function switchTabByName(name) {
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(t => { if (t.textContent.toLowerCase().includes(name)) switchTab(name, t); });
+  return false;
+}
+
+// ─── API key validation ───────────────────────────────────────────────────
+function onKeyInput(el) {
+  const val = el.value.trim();
+  const ok = val.startsWith('sk-ant-');
+  document.getElementById('key-status').textContent = ok ? '✓ Key looks valid' : (val ? 'Key should start with sk-ant-' : 'No key entered');
+  document.getElementById('key-status').className = 'key-status ' + (ok ? 'key-ok' : 'key-no');
+  document.getElementById('run-btn').disabled = !ok;
+}
+
+// ─── MCP call ─────────────────────────────────────────────────────────────
+async function mcpCall(mcpUrl, method, params) {
+  const body = { jsonrpc: '2.0', id: Date.now(), method, params };
+  const res = await fetch(mcpUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`MCP server returned ${res.status}`);
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+  return data.result;
+}
+
+async function runTool() {
+  const proj = currentProject;
+  if (!proj) return;
+
+  const apiKey = document.getElementById('chat-apikey').value.trim();
+  if (!apiKey.startsWith('sk-ant-')) return;
+
+  const args = { anthropic_api_key: apiKey };
+  proj.toolInputs.forEach(inp => {
+    const el = document.getElementById('inp-' + inp.name);
+    if (el) args[inp.name] = el.value.trim();
+  });
+
+  // Show user message
+  const msgs = document.getElementById('chat-messages');
+  const userSummary = proj.toolInputs.map(i => `**${i.label}**: ${args[i.name]}`).join(' · ');
+  addMessage('user', userSummary);
+  const thinkingId = addMessage('thinking', 'Calling MCP server…');
+
+  document.getElementById('run-btn').disabled = true;
+
+  try {
+    const result = await mcpCall(proj.mcp, 'tools/call', { name: proj.tool, arguments: args });
+    removeMessage(thinkingId);
+    const text = result?.content?.[0]?.text || JSON.stringify(result);
+    addMessage('assistant', text);
+  } catch (err) {
+    removeMessage(thinkingId);
+    addMessage('error', `Error: ${err.message}`);
+  } finally {
+    document.getElementById('run-btn').disabled = false;
+  }
+}
+
+let msgCount = 0;
+function addMessage(type, text) {
+  const id = 'msg-' + (++msgCount);
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-' + type;
+  div.id = id;
+  const label = type === 'user' ? 'You' : type === 'thinking' ? 'MCP Server' : type === 'error' ? 'Error' : 'Education Assistant';
+  const content = type === 'assistant' ? marked.parse(text) : text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  div.innerHTML = `<span class="msg-label">${label}</span><div class="msg-bubble">${content}</div>`;
+  msgs.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  return id;
+}
+function removeMessage(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ─── Render project cards ──────────────────────────────────────────────────
+function renderCards() {
+  const grid = document.getElementById('projects-grid');
+  grid.innerHTML = PROJECTS.map(p => `
+    <div class="project-card" onclick="navigate('project','${p.slug}')">
+      <div class="card-emoji">${p.emoji}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-tldr">${p.tldr}</div>
+      <div class="card-tags">${p.tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+      <div class="card-footer">
+        <a class="card-link" href="https://github.com/${p.github}" target="_blank" onclick="event.stopPropagation()">GitHub ↗</a>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── Hash routing on load ─────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  renderCards();
+  const hash = window.location.hash.replace('#', '');
+  if (hash.startsWith('project/')) {
+    navigate('project', hash.replace('project/', ''));
+  }
+});
+
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) navigate('home');
+  else if (hash.startsWith('project/')) navigate('project', hash.replace('project/', ''));
+});
 </script>
 </body>
 </html>
