@@ -3,16 +3,18 @@
     "display_name": "Education Assistant",
     "slug": "education-assistant",
     "emoji": "\ud83d\udcda",
-    "one_liner": "Structured study guides for DS, ML & GenAI topics",
+    "one_liner": "Deep-research DS/ML/GenAI/Statistics topics and get curated learning resources.",
     "tech_tags": [
       "Claude API",
+      "Claude Opus",
       "MCP",
-      "TypeScript",
-      "Vercel"
+      "Express",
+      "Vercel",
+      "Python"
     ],
-    "mcp_url": "https://education-assistant.vercel.app/api/mcp",
+    "mcp_url": "https://education-assistant-mcp.vercel.app/api/mcp",
     "github_url": "https://github.com/ritwikmoitra/education-assistant",
     "added_at": "2026-03-31T11:49:51.514700+00:00",
-    "updated_at": "2026-03-31T12:03:47.140998+00:00"
+    "updated_at": "2026-04-01T12:09:45.108803+00:00"
   }
 ]
