@@ -379,7 +379,10 @@ function loadProj(p){
   document.getElementById('p-desc').textContent=p.tldr;
   document.getElementById('p-links').innerHTML=
     `<a class="btn btn-p" href="https://github.com/${p.github}" target="_blank">GitHub ↗</a>
-     <button class="btn" onclick="tab('live')">Try Live ⚡</button>`;
+     <button class="btn" id="try-live-btn" type="button">Try Live ⚡</button>`;
+  document.getElementById('try-live-btn').addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();tab('live');
+  });
   // reset tabs
   tab('readme');
   // fetch README
