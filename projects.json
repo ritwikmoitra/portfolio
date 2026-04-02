@@ -16,5 +16,37 @@
     "github_url": "https://github.com/ritwikmoitra/education-assistant",
     "added_at": "2026-03-31T11:49:51.514700+00:00",
     "updated_at": "2026-04-01T12:21:18.426861+00:00"
+  },
+  {
+    "display_name": "Market Cycle Analyst",
+    "slug": "explain-market-cycle",
+    "emoji": "\ud83d\udcc8",
+    "one_liner": "Analyse Indian equity market cycle phases for any date range using a 4-pillar data framework.",
+    "tech_tags": [
+      "Claude API",
+      "Web Search",
+      "Chart.js",
+      "Python",
+      "Vercel"
+    ],
+    "mcp_url": "https://explain-market-cycle-mcp.vercel.app/api/mcp",
+    "github_url": "https://github.com/ritwikmoitra/explain-market-cycle",
+    "tool_name": "explain_market_cycle",
+    "tool_inputs": [
+      {
+        "name": "start_period",
+        "label": "Start Period (YYYY-MM)",
+        "ph": "e.g. 2020-01",
+        "type": "text"
+      },
+      {
+        "name": "end_period",
+        "label": "End Period (YYYY-MM)",
+        "ph": "e.g. 2024-12",
+        "type": "text"
+      }
+    ],
+    "added_at": "2026-04-02T12:35:42.823082+00:00",
+    "updated_at": "2026-04-02T12:35:42.823082+00:00"
   }
 ]
