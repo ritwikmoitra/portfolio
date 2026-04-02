@@ -29,7 +29,7 @@
       "Python",
       "Vercel"
     ],
-    "mcp_url": "https://explain-market-cycle-mcp.vercel.app/api/mcp",
+    "mcp_url": "https://explain-market-cycle.vercel.app/api/mcp",
     "github_url": "https://github.com/ritwikmoitra/explain-market-cycle",
     "tool_name": "explain_market_cycle",
     "tool_inputs": [
