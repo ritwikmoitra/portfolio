@@ -48,5 +48,44 @@
     ],
     "added_at": "2026-04-02T12:35:42.823082+00:00",
     "updated_at": "2026-04-02T12:35:42.823082+00:00"
+  },
+  {
+    "display_name": "AI Digest",
+    "slug": "ai-digest",
+    "emoji": "\ud83d\udcf0",
+    "one_liner": "Weekly AI news digest from YouTube, newsletters, and blogs with career synthesis",
+    "tech_tags": [
+      "YouTube RSS",
+      "Gmail API",
+      "Google Docs",
+      "Google Drive",
+      "Web Scraping",
+      "AI Career Intelligence"
+    ],
+    "mcp_url": "https://ai-digest-mcp-deploy.vercel.app/api/mcp",
+    "github_url": "https://github.com/ritwikmoitra/ai-digest",
+    "tool_name": "run_ai_digest",
+    "tool_inputs": [
+      {
+        "name": "mode",
+        "label": "Mode",
+        "ph": "digest | profile_synthesis | brainstorm",
+        "type": "text"
+      },
+      {
+        "name": "date_range",
+        "label": "Date Range",
+        "ph": "Last 7 days (default)",
+        "type": "text"
+      },
+      {
+        "name": "deep_digest",
+        "label": "Deep Digest",
+        "ph": "true for video summaries",
+        "type": "text"
+      }
+    ],
+    "added_at": "2026-04-03T07:13:11.058511+00:00",
+    "updated_at": "2026-04-03T07:13:11.058511+00:00"
   }
 ]
